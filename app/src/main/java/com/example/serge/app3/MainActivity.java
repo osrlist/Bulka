@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-       /* dbHelper =  new DBHelper(this);
+        dbHelper =  new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
+
         Cursor cursor = database.query("tProduct", null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("mLog","0 rows");
 
         cursor.close();
-        */
     }
 
     @Override

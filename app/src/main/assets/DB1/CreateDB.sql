@@ -4,7 +4,8 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS tProduct;
 
-CREATE TABLE tProduct (
+CREATE TABLE tProduct
+(
     ProductID      INTEGER       PRIMARY KEY AUTOINCREMENT,
     ProductGroupID INTEGER       NOT NULL,
     Name           VARCHAR (100) NOT NULL
