@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">App3</string>
-    <string name="title_user">Рабочии</string>
+    <string name="app_name">Булочная</string>
+    <string name="title_user">Сотрудники</string>
+    <string name="select_user">Выбери себя</string>
+    <string name="add_session">Добавь смену</string>
+    <string name="done">Готово</string>
+    <string name="addSessionDes">Добавь смену или выбире если это продолжение смены</string>
+    <string name="titleBtAdd">+</string>
 </resources>
