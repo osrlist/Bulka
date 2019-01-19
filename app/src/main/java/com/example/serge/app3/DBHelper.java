@@ -2,10 +2,10 @@ package com.example.serge.app3;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.serge.app3.MainActivity.LOGTAG;
 
 public class DBHelper extends SQLiteOpenHelper {

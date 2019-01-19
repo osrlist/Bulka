@@ -1,6 +1,7 @@
 package com.example.serge.app3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -8,20 +9,41 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOGTAG = "mLog";
-    DBHelper dbHelper;
+    public static final String PREFEREMCES_USER = "PREFEREMCES_USER";
+
+    private DBHelper dbHelper;
+    private int UserID;
+    private TextView twUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        twUser = (TextView) findViewById(R.id.twUser);
+
+        View.OnClickListener onClBtnCancel = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showUser();
+            }
+        };
+        twUser.setOnClickListener(onClBtnCancel);
+
         dbHelper =  new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
+        // Начитаем значение, которое было в пролшлый раз
+        LoadPreferences();
+        loadUser();
 
-        Cursor cursor = database.query("tProduct", null, null, null, null, null, null);
+/*        Cursor cursor = database.query("tProduct", null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             int idIndex = cursor.getColumnIndex("ProductID");
@@ -36,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("mLog","0 rows");
 
         cursor.close();
+        */
     }
 
     @Override
@@ -70,5 +93,49 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.close();
     }
 
+    private void savePreferences(){
+        SharedPreferences sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt(PREFEREMCES_USER, UserID);
+        ed.commit();
+        return;
+    }
 
+    private void LoadPreferences(){
+        SharedPreferences sPref = getPreferences(MODE_PRIVATE);
+        UserID = sPref.getInt(PREFEREMCES_USER, 0);
+        return;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        savePreferences();
+    }
+
+    private void loadUser(){
+        if (UserID != 0) {
+            SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+
+            Cursor cursor = database.rawQuery("Select FirstName" +
+                    ", MidleName" +
+                    ", LastName" +
+                    " from tUser" +
+                    " where UserID = ?", new String[]{String.valueOf(UserID)});
+
+            if (cursor.moveToFirst()) {
+                int firstNameIndex = cursor.getColumnIndex("FirstName");
+                int midleNameIndex = cursor.getColumnIndex("MidleName");
+                int LastNameIndex = cursor.getColumnIndex("LastName");
+
+                twUser.setText(cursor.getString(firstNameIndex) + ' ' +
+                        cursor.getString(midleNameIndex) + ' ' +
+                        cursor.getString(LastNameIndex)
+                );
+                cursor.close();
+                database.close();
+            }
+        }
+    }
 }
