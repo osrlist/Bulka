@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.serge.app3.MainActivity.LOGTAG;
 
 public class DBHelper extends SQLiteOpenHelper {

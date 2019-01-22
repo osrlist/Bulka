@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/twUser"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:text="@string/select_user"
