@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String LOGTAG = "mLog";
     public static final String PREFEREMCES_USER = "PREFEREMCES_USER";
 
-    private DBHelper dbHelper;
     private int UserID;
     private TextView twUser;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,12 +113,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         savePreferences();
+        dbHelper.close();
     }
 
     private void loadUser(){
         if (UserID != 0) {
             SQLiteDatabase database = dbHelper.getWritableDatabase();
-
 
             Cursor cursor = database.rawQuery("Select FirstName" +
                     ", MiddleName" +
