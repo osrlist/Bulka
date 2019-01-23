@@ -15,6 +15,13 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    class OnClickUser implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            showUser();
+        }
+    }
+
     public static final String LOGTAG = "mLog";
     public static final String PREFEREMCES_USER = "PREFEREMCES_USER";
 
@@ -29,12 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         twUser = (TextView) findViewById(R.id.twUser);
 
-        View.OnClickListener onClBtnCancel = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showUser();
-            }
-        };
+        OnClickUser onClBtnCancel = new OnClickUser();
         twUser.setOnClickListener(onClBtnCancel);
 
         dbHelper =  new DBHelper(this);
@@ -119,18 +121,18 @@ public class MainActivity extends AppCompatActivity {
 
 
             Cursor cursor = database.rawQuery("Select FirstName" +
-                    ", MidleName" +
+                    ", MiddleName" +
                     ", LastName" +
                     " from tUser" +
                     " where UserID = ?", new String[]{String.valueOf(UserID)});
 
             if (cursor.moveToFirst()) {
                 int firstNameIndex = cursor.getColumnIndex("FirstName");
-                int midleNameIndex = cursor.getColumnIndex("MidleName");
+                int middleNameIndex = cursor.getColumnIndex("MiddleName");
                 int LastNameIndex = cursor.getColumnIndex("LastName");
 
                 twUser.setText(cursor.getString(firstNameIndex) + ' ' +
-                        cursor.getString(midleNameIndex) + ' ' +
+                        cursor.getString(middleNameIndex) + ' ' +
                         cursor.getString(LastNameIndex)
                 );
                 cursor.close();
