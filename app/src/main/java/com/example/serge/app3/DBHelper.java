@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import static com.example.serge.app3.MainActivity.LOGTAG;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "Dictionary.db";
     private Context context;
 
