@@ -6,15 +6,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 
-public class UserActivity extends FragmentActivity implements LoaderCallbacks<Cursor> {
+public class UserActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     private DBHelper dbHelper;
     private ListView lvData;
