@@ -2,8 +2,6 @@ package com.example.serge.app3;
 
 import java.util.concurrent.TimeUnit;
 
-import java.util.concurrent.TimeUnit;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,11 +11,6 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 
 
@@ -25,9 +18,9 @@ public class UserActivity extends FragmentActivity implements LoaderCallbacks<Cu
 
     private DBHelper dbHelper;
     private ListView lvData;
+    private SimpleCursorAdapter scAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SimpleCursorAdapter scAdapter;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
@@ -43,13 +36,9 @@ public class UserActivity extends FragmentActivity implements LoaderCallbacks<Cu
         scAdapter = new SimpleCursorAdapter(this, R.layout.item_user, null, from, to, 0);
         lvData = (ListView) findViewById(R.id.lvUser);
         lvData.setAdapter(scAdapter);
+
         // создаем лоадер для чтения данных
         getSupportLoaderManager().initLoader(0, null, this);
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle bndl) {
-        return new MyCursorLoader(this );
     }
 
     @Override
@@ -66,7 +55,7 @@ public class UserActivity extends FragmentActivity implements LoaderCallbacks<Cu
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle bndl) {
-        return new MyCursorLoader(this, db);
+        return new CursorLoaderUser(this, dbHelper);
     }
 
     @Override
@@ -77,14 +66,16 @@ public class UserActivity extends FragmentActivity implements LoaderCallbacks<Cu
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
     }
-    static class MyCursorLoader extends CursorLoader {
+
+    static class CursorLoaderUser extends CursorLoader {
 
         private DBHelper dbHelper;
 
-        public MyCursorLoader(Context context, DBHelper dbHelper) {
+        public CursorLoaderUser(Context context, DBHelper dbHelper) {
             super(context);
             this.dbHelper = dbHelper;
         }
+
         @Override
         public Cursor loadInBackground() {
             Cursor cursor;
