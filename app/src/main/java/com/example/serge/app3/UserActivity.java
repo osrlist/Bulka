@@ -1,7 +1,5 @@
 package com.example.serge.app3;
 
-import java.util.concurrent.TimeUnit;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -87,11 +85,6 @@ public class UserActivity extends AppCompatActivity implements LoaderCallbacks<C
                     " from tUser" +
                     " order by LastName, FirstName", null);
 
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             return cursor;
         }
 
