@@ -25,9 +25,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String LOGTAG = "mLog";
     public static final String PREFEREMCES_USER = "PREFEREMCES_USER";
 
+    public static final int REQUEST_CODE_USER = 1;
+
+    public static DBHelper dbHelper;
+
     private int UserID;
     private TextView twUser;
-    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,28 +42,12 @@ public class MainActivity extends AppCompatActivity {
         OnClickUser onClBtnCancel = new OnClickUser();
         twUser.setOnClickListener(onClBtnCancel);
 
-        dbHelper =  new DBHelper(this);
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        dbHelper = new DBHelper(this);
+
         // Начитаем значение, которое было в пролшлый раз
         LoadPreferences();
         loadUser();
 
-/*        Cursor cursor = database.query("tProduct", null, null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex("ProductID");
-            int ProductGroupIDIndex = cursor.getColumnIndex("ProductGroupID");
-            int NameIndex = cursor.getColumnIndex("Name");
-            do {
-                Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
-                        ", ProductGroupID = " + cursor.getInt(ProductGroupIDIndex) +
-                        ", Name = " + cursor.getString(NameIndex));
-            } while (cursor.moveToNext());
-        } else
-            Log.d("mLog","0 rows");
-
-        cursor.close();
-        */
     }
 
     @Override
@@ -73,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showUser(){
         Intent intent = new Intent(this, UserActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_USER);
         return;
     }
 

@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import static com.example.serge.app3.MainActivity.dbHelper;
+
 public class UserActivity extends AppCompatActivity {
 
-    private DBHelper dbHelper;
     private ListView lvData;
     private Cursor cursor;
     @Override
@@ -19,7 +20,6 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        dbHelper =  new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         cursor = database.rawQuery("Select UserID as _id" +
                 ", FirstName" +
@@ -38,15 +38,5 @@ public class UserActivity extends AppCompatActivity {
         lvData.setAdapter(scAdapter);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        dbHelper.close();
-    }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        dbHelper.close();
-    }
 }
