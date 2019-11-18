@@ -1,4 +1,4 @@
-package com.example.serge.app3;
+package com.example.serge.app3.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -6,12 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.serge.app3.DBHelper;
+import com.example.serge.app3.R;
+import com.example.serge.app3.shared.KeyExtra;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static final String LOGTAG = "mLog";
+    public static final String LOGTAG = "BulkaLog";
     public static final String PREFEREMCES_USER = "PREFEREMCES_USER";
 
     public static final int REQUEST_CODE_USER = 1;
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void showUser(){
         Intent intent = new Intent(this, UserActivity.class);
+
+        intent.putExtra(KeyExtra.EDIT_MODE.getKey(), true);
         startActivityForResult(intent, REQUEST_CODE_USER);
         return;
     }

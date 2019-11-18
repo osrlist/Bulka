@@ -6,9 +6,10 @@ DROP TABLE IF EXISTS tProduct;
 
 CREATE TABLE tProduct
 (
-    ProductID      INTEGER       PRIMARY KEY AUTOINCREMENT,
-    ProductGroupID INTEGER       NOT NULL,
-    Name           VARCHAR (100) NOT NULL
+    ProductID      INTEGER         PRIMARY KEY AUTOINCREMENT,
+    ProductGroupID INTEGER         NOT NULL,
+    Name           VARCHAR (100)   NOT NULL,
+    Qty            NUMERIC (12, 2) NOT NULL
 );
 
 

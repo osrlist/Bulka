@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 
 
@@ -16,7 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import static com.example.serge.app3.MainActivity.LOGTAG;
+import static com.example.serge.app3.activity.MainActivity.LOGTAG;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 4;
